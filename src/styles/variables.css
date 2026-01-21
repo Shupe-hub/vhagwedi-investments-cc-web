@@ -1,0 +1,41 @@
+:root {
+    /* Light mode */
+    --bg-main: #ffffff;
+    --bg-card: #ffffff;
+    --text-main: #0f172a;
+    --text-muted: #475569;
+
+    --gold: brown;
+    --gold-soft: #ffd98a;
+    --gold-dark: #d4a23f;
+
+    --nav-bg-1: #ffffff;
+    --nav-bg-2: #ffffff;
+
+    --hero-bg-1: #ffffff;        /* 👈 NEW */
+    --hero-bg-2: #f8fafc;        /* 👈 NEW */
+
+    --footer-bg-1: #f1f5f9;
+    --footer-bg-2: #e5e7eb;
+}
+
+/* ===== DARK MODE ===== */
+[data-theme="dark"] {
+    --bg-main: #050608;
+    --bg-card: #0e0f14;
+    --text-main: #e5e7eb;
+    --text-muted: #94a3b8;
+
+    --gold: #f5c46c;
+    --gold-soft: #ffd98a;
+    --gold-dark: #ff7400;
+
+    --nav-bg-1: #050608;
+    --nav-bg-2: #0e0f14;
+
+    --hero-bg-1: #050608;        /* 👈 NEW */
+    --hero-bg-2: #0e0f14;        /* 👈 NEW */
+
+    --footer-bg-1: #020204;
+    --footer-bg-2: #090a0f;
+}

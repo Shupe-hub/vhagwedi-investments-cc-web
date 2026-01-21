@@ -1,25 +1,85 @@
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { useTheme } from "../../context/ThemeContext";
+import "./Layout.css";
 
 const Header = () => {
+    const [openDropdown, setOpenDropdown] = useState(null);
+    const { theme, toggleTheme } = useTheme();
+
+    const navItems = [
+        { label: "Home", path: "/home" },
+        {
+            label: "Services",
+            path: "/services",
+            dropdown: [
+                { label: "Property Investments", path: "/services#property" },
+                { label: "Mining Investments", path: "/services#mining" },
+                { label: "Financial Services", path: "/services#finance" },
+            ],
+        },
+        {
+            label: "About Us",
+            path: "/about",
+            dropdown: [
+                { label: "Company Overview", path: "/about" },
+                { label: "Our Team", path: "/about#team" },
+            ],
+        },
+        { label: "Portfolio", path: "/portfolio" },
+        { label: "Contact", path: "/contact" },
+    ];
+
     return (
-        <header className="fixed top-0 left-0 w-full z-50 bg-white shadow">
-            <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-                <Link to="/" className="text-xl font-bold tracking-widest">
-                    VHAGWEDI
+        <header className="site-header">
+            <div className="header-logo-container">
+                <Link to="/home">
+                    <img
+                        src="/images/background.png"
+                        alt="Vhagwedi"
+                        className="header-logo"
+                    />
                 </Link>
-
-                <nav className="hidden md:flex gap-8 text-sm font-medium">
-                    <Link to="/" className="hover:text-yellow-500">Home</Link>
-                    <Link to="/property" className="hover:text-yellow-500">Property</Link>
-                    <Link to="/mining" className="hover:text-yellow-500">Mining</Link>
-                    <Link to="/financial" className="hover:text-yellow-500">Finance</Link>
-                    <Link to="/contact" className="hover:text-yellow-500">Contact</Link>
-                </nav>
-
-                <button className="hidden md:block px-5 py-2 bg-black text-white rounded-lg text-sm hover:bg-gray-800">
-                    Invest With Us
-                </button>
             </div>
+
+            <nav className="header-nav">
+                {navItems.map((item) => (
+                    <div
+                        key={item.label}
+                        className="nav-item"
+                        onMouseEnter={() => setOpenDropdown(item.label)}
+                        onMouseLeave={() => setOpenDropdown(null)}
+                    >
+                        <Link to={item.path} className="nav-link">
+                            {item.label}
+                        </Link>
+
+                        {item.dropdown && openDropdown === item.label && (
+                            <div className="dropdown-menu">
+                                {item.dropdown.map((subItem) => (
+                                    <Link
+                                        key={subItem.label}
+                                        to={subItem.path}
+                                        className="dropdown-link"
+                                    >
+                                        {subItem.label}
+                                    </Link>
+                                ))}
+                            </div>
+                        )}
+                    </div>
+                ))}
+
+                {/* 🌗 THEME TOGGLE ICON */}
+                <button
+                    className="theme-toggle"
+                    onClick={toggleTheme}
+                    aria-label="Toggle theme"
+                    title="Toggle light/dark mode"
+                >
+                    {theme === "light" ? "🌙" : "☀️"}
+                </button>
+            </nav>
         </header>
     );
 };
