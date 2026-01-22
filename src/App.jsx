@@ -5,6 +5,8 @@ import Portfolio from "./pages/Portfolio.jsx";
 import Property from "./pages/Property.jsx";
 import Mining from "./pages/Mining.jsx";
 import Finance from "./pages/Finance.jsx";
+import Contact from "./pages/Contact.jsx";
+import About from "./pages/About.jsx";
 
 function App() {
     return (
@@ -15,6 +17,8 @@ function App() {
             <Route path="/property" element={<Property />} />
             <Route path="/mining" element={<Mining />} />
             <Route path="/finance" element={<Finance />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/about" element={<About />} />
 
             <Route path="/portfolio" element={<Portfolio />} />
         </Routes>
