@@ -1,15 +1,60 @@
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Header from "../components/common/Header";
 import Footer from "../components/common/Footer";
 import "./Home.css";
 
+const SUGGESTIONS = [
+    { label: "Property Investments", keywords: ["property", "properties", "real estate"], path: "/property" },
+    { label: "Mining Investments", keywords: ["mining", "mine", "minerals"], path: "/mining" },
+    { label: "Financial Services", keywords: ["finance", "funding", "loans", "equity"], path: "/financial" },
+    { label: "Portfolio", keywords: ["portfolio", "projects"], path: "/portfolio" },
+    { label: "About Us", keywords: ["about", "company", "team"], path: "/about" },
+    { label: "Contact Us", keywords: ["contact", "support", "help"], path: "/contact" },
+    { label: "Services", keywords: ["services"], path: "/services" },
+];
+
 const Home = () => {
     const [searchQuery, setSearchQuery] = useState("");
+    const [filteredSuggestions, setFilteredSuggestions] = useState([]);
+    const [showSuggestions, setShowSuggestions] = useState(false);
 
-    const handleSearch = (e) => {
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        const query = searchQuery.toLowerCase().trim();
+
+        if (!query) {
+            setFilteredSuggestions([]);
+            return;
+        }
+
+        const matches = SUGGESTIONS.filter((item) =>
+            item.keywords.some((key) => key.includes(query) || query.includes(key)) ||
+            item.label.toLowerCase().includes(query)
+        );
+
+        setFilteredSuggestions(matches);
+        setShowSuggestions(true);
+    }, [searchQuery]);
+
+    const handleSearchSubmit = (e) => {
         e.preventDefault();
-        console.log("Search query:", searchQuery);
+
+        if (filteredSuggestions.length > 0) {
+            navigate(filteredSuggestions[0].path);
+            setShowSuggestions(false);
+        } else {
+            alert(
+                "Try: property, mining, finance, portfolio, about, or contact."
+            );
+        }
+    };
+
+    const handleSuggestionClick = (path) => {
+        navigate(path);
+        setShowSuggestions(false);
+        setSearchQuery("");
     };
 
     return (
@@ -29,14 +74,32 @@ const Home = () => {
                                 Premium Property • Strategic Mining • Sophisticated Finance
                             </p>
 
-                            <form onSubmit={handleSearch} className="hero-search-form">
-                                <input
-                                    type="text"
-                                    placeholder="Explore premium investments, properties, mining ventures…"
-                                    value={searchQuery}
-                                    onChange={(e) => setSearchQuery(e.target.value)}
-                                    className="hero-input"
-                                />
+                            {/* 🔎 LIVE SEARCH */}
+                            <form onSubmit={handleSearchSubmit} className="hero-search-form">
+                                <div className="search-wrapper">
+                                    <input
+                                        type="text"
+                                        placeholder="Try: property, mining, finance, portfolio…"
+                                        value={searchQuery}
+                                        onChange={(e) => setSearchQuery(e.target.value)}
+                                        onFocus={() => searchQuery && setShowSuggestions(true)}
+                                        className="hero-input"
+                                    />
+
+                                    {showSuggestions && filteredSuggestions.length > 0 && (
+                                        <ul className="search-suggestions">
+                                            {filteredSuggestions.map((item) => (
+                                                <li
+                                                    key={item.label}
+                                                    onClick={() => handleSuggestionClick(item.path)}
+                                                >
+                                                    {item.label}
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    )}
+                                </div>
+
                                 <button type="submit" className="hero-button">
                                     Search Opportunities
                                 </button>
@@ -59,13 +122,74 @@ const Home = () => {
                     </div>
 
                     <div className="hero-cta-container">
-                        <button className="hero-cta">
+                        <button
+                            className="hero-cta"
+                            onClick={() => navigate("/contact")}
+                        >
                             Start a Private Conversation About Your Portfolio →
                         </button>
                     </div>
                 </section>
 
-                {/* DIVISIONS */}
+                {/* ===== FEATURED PROJECTS ===== */}
+                <section className="featured-section">
+                    <h2 className="featured-title">Featured Investment Projects</h2>
+                    <p className="featured-subtitle">
+                        A selection of high-value investments delivered across South Africa.
+                    </p>
+
+                    <FeaturedSlider />
+                </section>
+
+                {/* ===== WHY CHOOSE US ===== */}
+                <section className="why-section">
+                    <h2 className="why-title">Why Choose Vhagwedi Investments</h2>
+                    <p className="why-subtitle">
+                        We combine disciplined capital deployment with strategic partnerships to deliver
+                        sustainable, high-impact investment outcomes.
+                    </p>
+
+                    <div className="why-grid">
+                        <div className="why-card">
+                            <div className="why-icon">🛡️</div>
+                            <h3>Regulated & Compliant</h3>
+                            <p>
+                                Fully compliant with South African regulations, ensuring transparency,
+                                governance, and investor protection.
+                            </p>
+                        </div>
+
+                        <div className="why-card">
+                            <div className="why-icon">📈</div>
+                            <h3>Proven Returns</h3>
+                            <p>
+                                A strong track record of delivering consistent returns across property,
+                                mining, and financial investments.
+                            </p>
+                        </div>
+
+                        <div className="why-card">
+                            <div className="why-icon">🤝</div>
+                            <h3>Trusted Partnerships</h3>
+                            <p>
+                                Long-term partnerships with institutional investors, developers, and
+                                industry specialists.
+                            </p>
+                        </div>
+
+                        <div className="why-card">
+                            <div className="why-icon">🌍</div>
+                            <h3>Sustainable Investments</h3>
+                            <p>
+                                Responsible investing focused on long-term impact, environmental care,
+                                and economic development.
+                            </p>
+                        </div>
+                    </div>
+                </section>
+
+
+                {/* DIVISIONS (UNCHANGED) */}
                 <section className="pillars-section">
                     <h2 className="pillars-title">Core Investment Pillars</h2>
 
@@ -120,6 +244,45 @@ const Home = () => {
                         ))}
                     </div>
                 </section>
+
+                {/* ===== QUICK ENQUIRY ===== */}
+                <section className="enquiry-section">
+                    <h2 className="enquiry-title">Start a Private Investment Conversation</h2>
+                    <p className="enquiry-subtitle">
+                        Tell us your area of interest and our investment team will contact you within 24 hours.
+                    </p>
+
+                    <form className="enquiry-form" onSubmit={(e) => {
+                        e.preventDefault();
+                        alert("Thank you! Your enquiry has been sent.");
+                    }}>
+                        <input
+                            type="text"
+                            placeholder="Full Name"
+                            required
+                            className="enquiry-input"
+                        />
+
+                        <input
+                            type="email"
+                            placeholder="Email Address"
+                            required
+                            className="enquiry-input"
+                        />
+
+                        <select className="enquiry-input" required>
+                            <option value="">Select Investment Interest</option>
+                            <option value="Property">Property</option>
+                            <option value="Mining">Mining</option>
+                            <option value="Finance">Finance</option>
+                        </select>
+
+                        <button type="submit" className="enquiry-btn">
+                            Submit Enquiry
+                        </button>
+                    </form>
+                </section>
+
             </main>
 
             <Footer />
@@ -135,7 +298,7 @@ const PillarCard = ({ title, images, desc, path }) => {
     useEffect(() => {
         const timer = setInterval(() => {
             setIndex((prev) => (prev + 1) % images.length);
-        }, 3500); // slide speed
+        }, 3500);
 
         return () => clearInterval(timer);
     }, [images.length]);
@@ -165,5 +328,82 @@ const PillarCard = ({ title, images, desc, path }) => {
         </Link>
     );
 };
+
+const FEATURED_PROJECTS = [
+    {
+        title: "Sandton Luxury Apartments",
+        location: "Sandton, Johannesburg",
+        image: "/images/projects/sandton.jpg",
+        path: "/portfolio",
+    },
+    {
+        title: "Limpopo Chrome Mine",
+        location: "Limpopo Province",
+        image: "/images/projects/limpopo_mine.jpg",
+        path: "/portfolio",
+    },
+    {
+        title: "Durban Office Park",
+        location: "Durban, KwaZulu-Natal",
+        image: "/images/projects/durban_office.jpg",
+        path: "/portfolio",
+    },
+    {
+        title: "Cape Town Retail Hub",
+        location: "Cape Town, Western Cape",
+        image: "/images/projects/cape_retail.jpg",
+        path: "/portfolio",
+    },
+];
+
+const FeaturedSlider = () => {
+    const [index, setIndex] = useState(0);
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        const timer = setInterval(() => {
+            setIndex((prev) => (prev + 1) % FEATURED_PROJECTS.length);
+        }, 4500);
+
+        return () => clearInterval(timer);
+    }, []);
+
+    const prev = () => {
+        setIndex((prev) =>
+            prev === 0 ? FEATURED_PROJECTS.length - 1 : prev - 1
+        );
+    };
+
+    const next = () => {
+        setIndex((prev) => (prev + 1) % FEATURED_PROJECTS.length);
+    };
+
+    return (
+        <div className="featured-slider">
+            <button className="slider-btn left" onClick={prev}>‹</button>
+
+            <div className="slider-track">
+                {FEATURED_PROJECTS.map((item, i) => (
+                    <div
+                        key={item.title}
+                        className={`featured-card ${i === index ? "active" : ""}`}
+                        onClick={() => navigate(item.path)}
+                    >
+                        <img src={item.image} alt={item.title} />
+                        <div className="featured-overlay"></div>
+
+                        <div className="featured-info">
+                            <h3>{item.title}</h3>
+                            <p>{item.location}</p>
+                        </div>
+                    </div>
+                ))}
+            </div>
+
+            <button className="slider-btn right" onClick={next}>›</button>
+        </div>
+    );
+};
+
 
 export default Home;
