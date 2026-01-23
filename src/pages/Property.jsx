@@ -9,7 +9,7 @@ const Property = () => {
     const navigate = useNavigate();
 
     const images = [
-        { src: "/images/property/property_1.jpeg", address: "12 Sandton Drive, Sandton, Johannesburg" },
+        { src: "/images/property/property_6.jpg", address: "12 Sandton Drive, Sandton, Johannesburg" },
         { src: "/images/property/property_2.jpg", address: "45 Umhlanga Ridge, Durban" },
         { src: "/images/property/property_3.jpg", address: "78 Cape Road, Sea Point, Cape Town" },
         { src: "/images/property/property_4.jpg", address: "22 Polokwane Central, Limpopo" },

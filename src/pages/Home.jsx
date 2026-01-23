@@ -200,6 +200,10 @@ const Home = () => {
                                 "/images/property/property_4.jpg",
                                 "/images/property/property_2.jpg",
                                 "/images/property/property_3.jpg",
+                                "/images/property/property_5.jpg",
+                                "/images/property/property_6.jpg",
+                                "/images/property/property_7.jpg",
+                                "/images/property/property_8.jpg",
                             ]}
                             desc="Iconic developments • Prime commercial & residential acquisitions • High-yield sectional title & estates"
                             path="/property"
@@ -333,25 +337,25 @@ const FEATURED_PROJECTS = [
     {
         title: "Sandton Luxury Apartments",
         location: "Sandton, Johannesburg",
-        image: "/images/projects/sandton.jpg",
+        image: "/images/projects/fea_.jpg",
         path: "/portfolio",
     },
     {
         title: "Limpopo Chrome Mine",
         location: "Limpopo Province",
-        image: "/images/projects/limpopo_mine.jpg",
+        image: "/images/projects/fea_2.jpg",
         path: "/portfolio",
     },
     {
         title: "Durban Office Park",
         location: "Durban, KwaZulu-Natal",
-        image: "/images/projects/durban_office.jpg",
+        image: "/images/projects/fea_3.jpg",
         path: "/portfolio",
     },
     {
         title: "Cape Town Retail Hub",
         location: "Cape Town, Western Cape",
-        image: "/images/projects/cape_retail.jpg",
+        image: "/images/projects/fea_4.jpg",
         path: "/portfolio",
     },
 ];
