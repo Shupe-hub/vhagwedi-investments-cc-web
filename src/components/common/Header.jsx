@@ -5,6 +5,7 @@ import "./Layout.css";
 
 const Header = () => {
     const [openDropdown, setOpenDropdown] = useState(null);
+    const [mobileOpen, setMobileOpen] = useState(false);
     const { theme, toggleTheme } = useTheme();
 
     const navItems = [
@@ -30,11 +31,10 @@ const Header = () => {
         { label: "Contact", path: "/contact" },
     ];
 
-    // ✅ Choose logo based on theme
     const logoSrc =
         theme === "dark"
-            ? "/images/DARK_MODE_LOGO.png"   // 👈 your dark-mode logo
-            : "/images/LIGHT_MODE_LOGO.png"; // 👈 your light-mode logo
+            ? "/images/DARK_MODE_LOGO.png"
+            : "/images/LIGHT_MODE_LOGO.png";
 
     return (
         <header className="site-header">
@@ -48,7 +48,16 @@ const Header = () => {
                 </Link>
             </div>
 
-            <nav className="header-nav">
+            {/* 🍔 Hamburger */}
+            <button
+                className="hamburger"
+                onClick={() => setMobileOpen(!mobileOpen)}
+                aria-label="Toggle menu"
+            >
+                ☰
+            </button>
+
+            <nav className={`header-nav ${mobileOpen ? "open" : ""}`}>
                 {navItems.map((item) => (
                     <div
                         key={item.label}
@@ -56,7 +65,11 @@ const Header = () => {
                         onMouseEnter={() => setOpenDropdown(item.label)}
                         onMouseLeave={() => setOpenDropdown(null)}
                     >
-                        <Link to={item.path} className="nav-link">
+                        <Link
+                            to={item.path}
+                            className="nav-link"
+                            onClick={() => setMobileOpen(false)}
+                        >
                             {item.label}
                         </Link>
 
@@ -67,6 +80,7 @@ const Header = () => {
                                         key={subItem.label}
                                         to={subItem.path}
                                         className="dropdown-link"
+                                        onClick={() => setMobileOpen(false)}
                                     >
                                         {subItem.label}
                                     </Link>
@@ -76,7 +90,6 @@ const Header = () => {
                     </div>
                 ))}
 
-                {/* 🌗 THEME TOGGLE ICON */}
                 <button
                     className="theme-toggle"
                     onClick={toggleTheme}
