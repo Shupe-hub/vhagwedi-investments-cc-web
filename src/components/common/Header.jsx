@@ -8,7 +8,7 @@ const Header = () => {
     const { theme, toggleTheme } = useTheme();
 
     const navItems = [
-        { label: "Home", path: "/home" },
+        { label: "Home", path: "/" },
         {
             label: "Services",
             path: "/services",
@@ -30,13 +30,19 @@ const Header = () => {
         { label: "Contact", path: "/contact" },
     ];
 
+    // ✅ Choose logo based on theme
+    const logoSrc =
+        theme === "dark"
+            ? "/images/DARK_MODE_LOGO.png"   // 👈 your dark-mode logo
+            : "/images/LIGHT_MODE_LOGO.png"; // 👈 your light-mode logo
+
     return (
         <header className="site-header">
             <div className="header-logo-container">
                 <Link to="/">
                     <img
-                        src="/images/background.png"
-                        alt="Vhagwedi"
+                        src={logoSrc}
+                        alt="Vhagwedi Investments CC"
                         className="header-logo"
                     />
                 </Link>
