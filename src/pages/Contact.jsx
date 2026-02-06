@@ -1,9 +1,71 @@
+import { useState } from "react";
 import Header from "../components/common/Header";
 import Footer from "../components/common/Footer";
 import { FaWhatsapp, FaFacebookF, FaInstagram } from "react-icons/fa";
 import "./Contact.css";
 
 const Contact = () => {
+    const [formData, setFormData] = useState({
+        fullName: "",
+        email: "",
+        phone: "",
+        message: ""
+    });
+
+    const [errors, setErrors] = useState({});
+
+    const handleChange = (e) => {
+        setFormData({
+            ...formData,
+            [e.target.name]: e.target.value
+        });
+    };
+
+    const validate = () => {
+        const newErrors = {};
+
+        if (!formData.fullName.trim()) {
+            newErrors.fullName = "Full name is required";
+        }
+
+        if (!formData.email.trim()) {
+            newErrors.email = "Email is required";
+        } else if (!/^\S+@\S+\.\S+$/.test(formData.email)) {
+            newErrors.email = "Enter a valid email address";
+        }
+
+        if (!formData.phone.trim()) {
+            newErrors.phone = "Phone number is required";
+        } else if (!/^[0-9+ ]+$/.test(formData.phone)) {
+            newErrors.phone = "Phone number must contain only numbers";
+        }
+
+        if (!formData.message.trim()) {
+            newErrors.message = "Message is required";
+        }
+
+        setErrors(newErrors);
+        return Object.keys(newErrors).length === 0;
+    };
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+
+        if (!validate()) return;
+
+        // 🔐 SAFE TO SUBMIT (API / Email / Backend)
+        console.log("Form submitted:", formData);
+
+        alert("Your enquiry has been sent successfully!");
+
+        setFormData({
+            fullName: "",
+            email: "",
+            phone: "",
+            message: ""
+        });
+    };
+
     return (
         <>
             <Header />
@@ -12,7 +74,6 @@ const Contact = () => {
                 <div className="contact-overlay"></div>
 
                 <div className="contact-content">
-                    {/* PAGE HEADER */}
                     <section className="contact-header">
                         <h1 className="contact-title">Contact Us</h1>
                         <p className="contact-subtitle">
@@ -20,35 +81,62 @@ const Contact = () => {
                         </p>
                     </section>
 
-                    {/* CONTENT GRID */}
                     <section className="contact-grid">
-                        {/* CONTACT FORM */}
+                        {/* FORM */}
                         <div className="form-card">
                             <h2 className="section-title">Send Us a Message</h2>
 
-                            <form className="contact-form">
-                                <Input label="Full Name" placeholder="Your full name" />
+                            <form className="contact-form" onSubmit={handleSubmit} noValidate>
+                                <Input
+                                    label="Full Name"
+                                    name="fullName"
+                                    value={formData.fullName}
+                                    onChange={handleChange}
+                                    error={errors.fullName}
+                                    placeholder="Your full name"
+                                />
+
                                 <Input
                                     label="Email Address"
                                     type="email"
+                                    name="email"
+                                    value={formData.email}
+                                    onChange={handleChange}
+                                    error={errors.email}
                                     placeholder="you@example.com"
                                 />
-                                <Input label="Phone Number" placeholder="+27…" />
+
+                                <Input
+                                    label="Phone Number"
+                                    name="phone"
+                                    value={formData.phone}
+                                    onChange={handleChange}
+                                    error={errors.phone}
+                                    placeholder="+27…"
+                                />
 
                                 <div>
                                     <label className="form-label">Message</label>
                                     <textarea
+                                        name="message"
                                         rows="5"
-                                        placeholder="Tell us about your enquiry…"
+                                        value={formData.message}
+                                        onChange={handleChange}
                                         className="form-textarea"
+                                        placeholder="Tell us about your enquiry…"
                                     />
+                                    {errors.message && (
+                                        <small className="error-text">{errors.message}</small>
+                                    )}
                                 </div>
 
-                                <button className="submit-btn">Submit Enquiry</button>
+                                <button className="submit-btn" type="submit">
+                                    Submit Enquiry
+                                </button>
                             </form>
                         </div>
 
-                        {/* CONTACT DETAILS */}
+                        {/* DETAILS */}
                         <div className="details-card">
                             <h2 className="section-title">Get in Touch</h2>
 
@@ -67,45 +155,22 @@ const Contact = () => {
                                 <p>info@vhagwediinvestments.co.za</p>
                             </div>
 
-                            {/* SOCIAL MEDIA */}
                             <div className="social-section">
                                 <h3>Connect With Us</h3>
-
                                 <div className="social-row">
-                                    <a
-                                        href="https://wa.me/27834749155"
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className="social-icon"
-                                        aria-label="WhatsApp"
-                                    >
+                                    <a href="https://wa.me/27834749155" target="_blank" rel="noreferrer" className="social-icon">
                                         <FaWhatsapp />
                                     </a>
-
-                                    <a
-                                        href="https://www.facebook.com/"
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className="social-icon"
-                                        aria-label="Facebook"
-                                    >
+                                    <a href="https://www.facebook.com/" target="_blank" rel="noreferrer" className="social-icon">
                                         <FaFacebookF />
                                     </a>
-
-                                    <a
-                                        href="https://www.instagram.com/"
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className="social-icon"
-                                        aria-label="Instagram"
-                                    >
+                                    <a href="https://www.instagram.com/" target="_blank" rel="noreferrer" className="social-icon">
                                         <FaInstagram />
                                     </a>
                                 </div>
                             </div>
 
                             <div className="divider" />
-
                             <p className="contact-note">
                                 Our team will respond within 24–48 business hours.
                             </p>
@@ -119,12 +184,20 @@ const Contact = () => {
     );
 };
 
-/* ---------- SMALL COMPONENT ---------- */
+/* ---------- INPUT COMPONENT ---------- */
 
-const Input = ({ label, type = "text", placeholder }) => (
+const Input = ({ label, type = "text", name, value, onChange, placeholder, error }) => (
     <div>
         <label className="form-label">{label}</label>
-        <input type={type} placeholder={placeholder} className="form-input" />
+        <input
+            type={type}
+            name={name}
+            value={value}
+            onChange={onChange}
+            placeholder={placeholder}
+            className="form-input"
+        />
+        {error && <small className="error-text">{error}</small>}
     </div>
 );
 
