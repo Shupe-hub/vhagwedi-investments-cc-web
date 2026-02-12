@@ -8,11 +8,14 @@ import Finance from "./pages/Finance.jsx";
 import Contact from "./pages/Contact.jsx";
 import About from "./pages/About.jsx";
 import FloatingChat from "./components/common/FloatingChat.jsx";
+import ScrollToTop from "./components/common/ScrollToTop.jsx";
 
 function App() {
     return (
         <>
             <Routes>
+
+
                 <Route path="/" element={<Home />} />
                 <Route path="/home" element={<Home />} />
                 <Route path="/services" element={<Services />} />
@@ -26,6 +29,8 @@ function App() {
 
             {/* Floating chat must live OUTSIDE Routes */}
             <FloatingChat />
+
+            <ScrollToTop />
         </>
     );
 }

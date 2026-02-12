@@ -3,6 +3,8 @@ import { Link, useNavigate } from "react-router-dom";
 import Header from "../components/common/Header";
 import Footer from "../components/common/Footer";
 import "./Home.css";
+import EnquiryForm from "../components/common/EnquiryForm.jsx";
+
 
 const SUGGESTIONS = [
     { label: "Property Investments", keywords: ["property", "properties", "real estate"], path: "/property" },
@@ -256,35 +258,7 @@ const Home = () => {
                         Tell us your area of interest and our investment team will contact you within 24 hours.
                     </p>
 
-                    <form className="enquiry-form" onSubmit={(e) => {
-                        e.preventDefault();
-                        alert("Thank you! Your enquiry has been sent.");
-                    }}>
-                        <input
-                            type="text"
-                            placeholder="Full Name"
-                            required
-                            className="enquiry-input"
-                        />
-
-                        <input
-                            type="email"
-                            placeholder="Email Address"
-                            required
-                            className="enquiry-input"
-                        />
-
-                        <select className="enquiry-input" required>
-                            <option value="">Select Investment Interest</option>
-                            <option value="Property">Property</option>
-                            <option value="Mining">Mining</option>
-                            <option value="Finance">Finance</option>
-                        </select>
-
-                        <button type="submit" className="enquiry-btn">
-                            Submit Enquiry
-                        </button>
-                    </form>
+                    <EnquiryForm />
                 </section>
 
             </main>
@@ -335,29 +309,24 @@ const PillarCard = ({ title, images, desc, path }) => {
 
 const FEATURED_PROJECTS = [
     {
-        title: "Sandton Luxury Apartments",
-        location: "Sandton, Johannesburg",
-        image: "/images/property/property_3.jpg",
+        title: "Luxury Apartments",
+        location: ".",
+        image: "/images/property/apartments.jpg",
         path: "/portfolio",
     },
     {
-        title: "Limpopo Chrome Mine",
-        location: "Limpopo Province",
-        image: "/images/projects/fea_2.jpg",
+        title: "Chrome Mine",
+        location: ".",
+        image: "/images/mining/chrome_mine.jpg",
         path: "/portfolio",
     },
     {
-        title: "Durban Office Park",
-        location: "Durban, KwaZulu-Natal",
+        title: "Office Park",
+        location: ".",
         image: "/images/projects/fea_3.jpg",
         path: "/portfolio",
     },
-    {
-        title: "Cape Town Retail Hub",
-        location: "Cape Town, Western Cape",
-        image: "/images/projects/fea_4.jpg",
-        path: "/portfolio",
-    },
+
 ];
 
 const FeaturedSlider = () => {
