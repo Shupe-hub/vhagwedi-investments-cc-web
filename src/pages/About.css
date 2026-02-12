@@ -8,9 +8,6 @@
     position: relative;
     padding: 140px 40px 80px;
     min-height: 100vh;
-    background:
-            linear-gradient(135deg, var(--hero-bg-1), var(--hero-bg-2)),
-            url("/images/about_us_bg.jpg") center / cover no-repeat;
     transition: background 0.4s ease;
 }
 
