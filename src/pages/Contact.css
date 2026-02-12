@@ -180,6 +180,14 @@
     margin: 28px 0;
 }
 
+.error-text {
+    color: #e63946;
+    font-size: 0.85rem;
+    margin-top: 4px;
+    display: block;
+}
+
+
 /* ===== NOTE ===== */
 .contact-note {
     color: var(--text-muted);
