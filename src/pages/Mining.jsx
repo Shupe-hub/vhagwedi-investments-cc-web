@@ -9,11 +9,11 @@ const Mining = () => {
     const navigate = useNavigate();
 
     const images = [
-        { src: "/images/mining/mining_1.jpg", title: "Chrome Mining Site – Limpopo" },
-        { src: "/images/mining/mining_2.jpg", title: "Platinum Operations – North West" },
-        { src: "/images/mining/mining_3.jpg", title: "Coal Processing Plant – Mpumalanga" },
-        { src: "/images/mining/mining_4.jpg", title: "Open Pit Mining – Northern Cape" },
-        { src: "/images/mining/mining_5.jpg", title: "Exploration Drilling – Gauteng" },
+        { src: "/images/mining/chrome_mine.jpg", title: "Chrome Mining Site" },
+        { src: "/images/mining/platinum.jpg", title: "Platinum Operations" },
+        { src: "/images/mining/power_plant.jpg", title: "Coal Processing Plant" },
+        { src: "/images/mining/open_pit.jpg", title: "Open Pit Mining" },
+        { src: "/images/mining/drilling.jpg", title: "Exploration Drilling" },
     ];
 
     return (
@@ -60,7 +60,7 @@ const Mining = () => {
                         <h2>Mining Project Showcase</h2>
 
                         <video controls>
-                            <source src="/videos/mining_vid_1.mp4" type="video/mp4" />
+                            <source src="/images/mining/mining_video.mp4" type="video/mp4" />
                             Your browser does not support the video tag.
                         </video>
                     </section>
@@ -72,7 +72,7 @@ const Mining = () => {
                         <div className="contact-grid">
                             <div>
                                 <h4>Phone</h4>
-                                <p>+27 11 987 6543</p>
+                                <p>+27 83 474 9155</p>
                             </div>
                             <div>
                                 <h4>Email</h4>
@@ -80,7 +80,8 @@ const Mining = () => {
                             </div>
                             <div>
                                 <h4>Location</h4>
-                                <p>Johannesburg, South Africa</p>
+                                <p>111 Outeniqua Flats, 721
+                                    Church Street, Arcadia, 0083 </p>
                             </div>
                         </div>
 

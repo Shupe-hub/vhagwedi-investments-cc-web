@@ -81,8 +81,9 @@ const Footer = () => {
                 {/* CONTACT */}
                 <div className="footer-contact">
                     <h4>Contact</h4>
-                    <p>📍 South Africa</p>
-                    <p>📞 +27 82 123 4567</p>
+                    <p>📍 111 Outeniqua Flats, 721
+                        Church Street, Arcadia, 0083 - south africa</p>
+                    <p>📞 +27 83 474 9155</p>
                     <p>✉️ info@vhagwedi.co.za</p>
                 </div>
             </div>

@@ -122,6 +122,13 @@
     box-shadow: 0 12px 30px rgba(0,0,0,0.18);
 }
 
+.mining-video video {
+    width: 100%;
+    max-height: 500px;   /* 🔽 adjust this value */
+    object-fit: cover;  /* keeps it neat, no stretching */
+    border-radius: 12px; /* optional, looks clean */
+}
+
 /* ===== CONTACT ===== */
 .mining-contact {
     max-width: 1100px;

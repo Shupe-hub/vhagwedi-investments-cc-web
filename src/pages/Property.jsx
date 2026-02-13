@@ -9,11 +9,11 @@ const Property = () => {
     const navigate = useNavigate();
 
     const images = [
-        { src: "/images/property/property_6.jpg", address: "12 Sandton Drive, Sandton, Johannesburg" },
-        { src: "/images/property/property_2.jpg", address: "45 Umhlanga Ridge, Durban" },
-        { src: "/images/property/property_3.jpg", address: "78 Cape Road, Sea Point, Cape Town" },
-        { src: "/images/property/property_4.jpg", address: "22 Polokwane Central, Limpopo" },
-        { src: "/images/property/property_5.jpg", address: "22 Djibouti St, Central, Gauteng" },
+        { src: "/images/property/property_6.jpg", address: "_____________________________________________" },
+        { src: "/images/property/property_2.jpg", address: "_____________________________________________" },
+        { src: "/images/property/property_3.jpg", address: "_____________________________________________" },
+        { src: "/images/property/property_4.jpg", address: "_____________________________________________" },
+        { src: "/images/property/property_5.jpg", address: "_____________________________________________" },
     ];
 
     return (
@@ -59,7 +59,7 @@ const Property = () => {
                         <h2>Property Showcase</h2>
 
                         <video controls>
-                            <source src="/videos/pro_vid_1.mp4" type="video/mp4" />
+                            <source src="/images/property/apartment_video.mp4" type="video/mp4" />
                             Your browser does not support the video tag.
                         </video>
                     </section>
@@ -71,7 +71,7 @@ const Property = () => {
                         <div className="contact-grid">
                             <div>
                                 <h4>Phone</h4>
-                                <p>+27 11 123 4567</p>
+                                <p>+27 83 474 9155</p>
                             </div>
                             <div>
                                 <h4>Email</h4>
@@ -79,7 +79,8 @@ const Property = () => {
                             </div>
                             <div>
                                 <h4>Location</h4>
-                                <p>Johannesburg, South Africa</p>
+                                <p>111 Outeniqua Flats, 721
+                                    Church Street, Arcadia, 0083 </p>
                             </div>
                         </div>
 
