@@ -9,11 +9,11 @@ const Finance = () => {
     const navigate = useNavigate();
 
     const images = [
-        { src: "/images/finance/finance_1.jpg", title: "Private Credit Funding" },
-        { src: "/images/finance/finance_2.jpg", title: "Venture Capital Investments" },
+        { src: "/images/finance/private_credit.png", title: "Private Credit Funding" },
+        { src: "/images/finance/venture_capital.jpg", title: "Venture Capital Investments" },
         { src: "/images/finance/finance_3.jpg", title: "Structured Finance Solutions" },
-        { src: "/images/finance/finance_4.jpg", title: "Equity Partnerships" },
-        { src: "/images/finance/finance_5.jpg", title: "Bridging Finance Deals" },
+        { src: "/images/finance/frank_.jpg", title: "Equity Partnerships" },
+        { src: "/images/finance/loan.jpg", title: "Bridging Finance Deals" },
     ];
 
     return (
@@ -72,7 +72,7 @@ const Finance = () => {
                         <div className="contact-grid">
                             <div>
                                 <h4>Phone</h4>
-                                <p>+27 11 456 7890</p>
+                                <p>+27 83 474 9155</p>
                             </div>
                             <div>
                                 <h4>Email</h4>
@@ -80,7 +80,8 @@ const Finance = () => {
                             </div>
                             <div>
                                 <h4>Location</h4>
-                                <p>Johannesburg, South Africa</p>
+                                <p>111 Outeniqua Flats, 721
+                                    Church Street, Arcadia, 0083</p>
                             </div>
                         </div>
 

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import emailjs from "emailjs-com";
 import Header from "../components/common/Header";
 import Footer from "../components/common/Footer";
 import { FaWhatsapp, FaFacebookF, FaInstagram } from "react-icons/fa";
@@ -13,6 +14,7 @@ const Contact = () => {
     });
 
     const [errors, setErrors] = useState({});
+    const [showPopup, setShowPopup] = useState(false);
 
     const handleChange = (e) => {
         setFormData({
@@ -24,9 +26,7 @@ const Contact = () => {
     const validate = () => {
         const newErrors = {};
 
-        if (!formData.fullName.trim()) {
-            newErrors.fullName = "Full name is required";
-        }
+        if (!formData.fullName.trim()) newErrors.fullName = "Full name is required";
 
         if (!formData.email.trim()) {
             newErrors.email = "Email is required";
@@ -36,8 +36,6 @@ const Contact = () => {
 
         if (!formData.phone.trim()) {
             newErrors.phone = "Phone number is required";
-        } else if (!/^[0-9+ ]+$/.test(formData.phone)) {
-            newErrors.phone = "Phone number must contain only numbers";
         }
 
         if (!formData.message.trim()) {
@@ -50,20 +48,33 @@ const Contact = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-
         if (!validate()) return;
 
-        // 🔐 SAFE TO SUBMIT (API / Email / Backend)
-        console.log("Form submitted:", formData);
-
-        alert("Your enquiry has been sent successfully!");
-
-        setFormData({
-            fullName: "",
-            email: "",
-            phone: "",
-            message: ""
-        });
+        emailjs.send(
+            "service_viphppw",        // ✅ your service ID
+            "template_7adxxi7",       // ✅ your template ID
+            {
+                fullName: formData.fullName,
+                email: formData.email,
+                phone: formData.phone,
+                message: formData.message,
+            },
+            "C6QS6upEFp4HTzr0Z"        // ✅ your public key
+        )
+            .then(() => {
+                setShowPopup(true);
+                setFormData({
+                    fullName: "",
+                    email: "",
+                    phone: "",
+                    message: ""
+                });
+                setErrors({});
+            })
+            .catch((error) => {
+                console.error("EmailJS Error:", error);
+                alert("Failed to send message. Please try again.");
+            });
     };
 
     return (
@@ -161,12 +172,8 @@ const Contact = () => {
                                     <a href="https://wa.me/27834749155" target="_blank" rel="noreferrer" className="social-icon">
                                         <FaWhatsapp />
                                     </a>
-                                    <a href="https://www.facebook.com/" target="_blank" rel="noreferrer" className="social-icon">
-                                        <FaFacebookF />
-                                    </a>
-                                    <a href="https://www.instagram.com/" target="_blank" rel="noreferrer" className="social-icon">
-                                        <FaInstagram />
-                                    </a>
+                                    <a href="#" className="social-icon"><FaFacebookF /></a>
+                                    <a href="#" className="social-icon"><FaInstagram /></a>
                                 </div>
                             </div>
 
@@ -180,12 +187,24 @@ const Contact = () => {
             </main>
 
             <Footer />
+
+            {/* SUCCESS POPUP */}
+            {showPopup && (
+                <div className="popup-overlay">
+                    <div className="popup-box">
+                        <h3>Thank You!</h3>
+                        <p>Your message has been sent successfully.</p>
+                        <button className="popup-btn" onClick={() => setShowPopup(false)}>
+                            Close
+                        </button>
+                    </div>
+                </div>
+            )}
         </>
     );
 };
 
 /* ---------- INPUT COMPONENT ---------- */
-
 const Input = ({ label, type = "text", name, value, onChange, placeholder, error }) => (
     <div>
         <label className="form-label">{label}</label>

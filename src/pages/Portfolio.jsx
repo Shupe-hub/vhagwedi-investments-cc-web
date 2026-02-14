@@ -10,11 +10,9 @@ const Portfolio = () => {
         {
             title: "Luxury Residential Estate",
             category: "Property",
-            image: "/images/property/property_4.jpg",
+            image: "/images/property/apartments.jpg",
             description:
                 "High-end residential estate development with modern architecture and sustainable design.",
-            location: "Gauteng, South Africa",
-            value: "R320M",
         },
         {
             title: "Commercial Office Complex",
@@ -28,7 +26,7 @@ const Portfolio = () => {
         {
             title: "Platinum Mining Venture",
             category: "Mining",
-            image: "/images/mining/mining_1.jpg",
+            image: "/images/mining/platinum.jpg",
             description:
                 "Strategic stake in a platinum group metals operation with long-term production contracts.",
             location: "Limpopo, South Africa",
@@ -37,14 +35,14 @@ const Portfolio = () => {
         {
             title: "Chrome Processing Plant",
             category: "Mining",
-            image: "/images/mining/mining_2.jpg",
+            image: "/images/mining/power_plant.jpg",
             description:
                 "Development of a mid-scale chrome beneficiation plant.",
             location: "North West, South Africa",
             value: "R260M",
         },
         {
-            title: "SME Growth Fund",
+            title: "SMME Growth Fund",
             category: "Finance",
             image: "/images/finance/finance_1.jpg",
             description:
@@ -99,12 +97,7 @@ const Portfolio = () => {
 
                                 <div className="portfolio-body">
                                     <h3>{project.title}</h3>
-                                    <p className="portfolio-location">
-                                        📍 {project.location}
-                                    </p>
-                                    <p className="portfolio-value">
-                                        Investment Value: {project.value}
-                                    </p>
+
                                 </div>
                             </div>
                         ))}

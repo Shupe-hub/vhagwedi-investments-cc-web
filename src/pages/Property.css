@@ -118,10 +118,17 @@
 
 .property-video video {
     width: 100%;
-    max-width: 900px;
     border-radius: 16px;
     box-shadow: 0 12px 30px rgba(0,0,0,0.18);
 }
+
+.property-video video {
+    width: 100%;
+    max-height: 500px;   /* 🔽 adjust this value */
+    object-fit: cover;  /* keeps it neat, no stretching */
+    border-radius: 12px; /* optional, looks clean */
+}
+
 
 /* ===== CONTACT ===== */
 .property-contact {
